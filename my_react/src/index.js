@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import Lifecycle from './Lifecycle'
 // const name = 'keshav'
 // const currentDate = new Date().toLocaleDateString();
 // const currentTime = new Date().toLocaleTimeString();
@@ -30,6 +31,7 @@ import App from './App';
 ReactDOM.render(
     <>
         <App />
+        <Lifecycle/>
     </>
     ,document.getElementById('root')
 )
