@@ -30,8 +30,8 @@ import Lifecycle from './Lifecycle'
 
 ReactDOM.render(
     <>
-        <App />
-        <Lifecycle/>
+        {/* <App /> */}
+        {/* <Lifecycle/> */}
     </>
     ,document.getElementById('root')
 )
