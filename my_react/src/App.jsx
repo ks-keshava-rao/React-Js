@@ -7,6 +7,7 @@ import React from "react";
 // import HookReduce from "./HookReduce";
 // import Coordinate from "./Coordinate";
 import HookCallback from "./HookCallback";
+import HookMemo from "./HookMemo";
 function App() {
     return (
         <>
@@ -17,8 +18,9 @@ function App() {
             {/* <HookEffect/> */}
             {/* <HookReduce/>
             <Coordinate/> */}
-            <HookCallback/>
-          
+            {/* <HookCallback/> */}
+             {/* <HookMemo/> */}
+             
         </>
     )
 }
