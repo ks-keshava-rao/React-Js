@@ -14,7 +14,7 @@ function HookEffect() {
   useEffect(()=>{
     document.title = `Current count ${count}`
     console.log("Use effect called")
-  },[count]);
+  },[count]);//unmounting
   return (
     <>
         <div className='card-body'>
