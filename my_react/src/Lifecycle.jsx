@@ -1,3 +1,5 @@
+// mounting phase - A-constructor , Aderivedstate , Arender , B constructor , B getderivedstate , B derivedstate , B Render , B componentdidmount , A componentdidmount
+// update cycle - A getderived class , A shouldcomponentupdate , A render, B getderived , B getsnapshot , A getsnapshot , B componentdidupdate ,B componentdidupdate
 import React, { Component } from "react";
 import Lifecycle2 from "./Lifecycle2";
 class Lifecycle extends Component {
