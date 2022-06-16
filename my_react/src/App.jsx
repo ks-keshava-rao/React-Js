@@ -8,6 +8,7 @@ import React from "react";
 // import Coordinate from "./Coordinate";
 import HookCallback from "./HookCallback";
 import HookMemo from "./HookMemo";
+import CleanUpEffect from "./CleanUpEffect";
 function App() {
     return (
         <>
@@ -20,6 +21,7 @@ function App() {
             <Coordinate/> */}
             {/* <HookCallback/> */}
              {/* <HookMemo/> */}
+             <CleanUpEffect/>
              
         </>
     )
