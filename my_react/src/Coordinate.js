@@ -12,6 +12,11 @@ function Coordinate(){
     useEffect(()=>{
         console.log("use effect called");
         window.addEventListener('mousemove',getMousePosition)
+
+        return ()=>{
+            console.log('Component unmounting');
+            window.removeEventListener('mousemove',getMousePosition);
+        }
     },[])
     return (
         <>
