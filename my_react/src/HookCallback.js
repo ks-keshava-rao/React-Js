@@ -1,3 +1,4 @@
+// useMemo returns a memoized value and useCallback returns a memoized function. You can learn more about useCallback
 import React,{useCallback, useState} from 'react'
 import DisplayList from './DisplayList'
 function HookCallback(){
@@ -7,6 +8,9 @@ function HookCallback(){
     const getItems = useCallback(()=>{
         return [number,number+1,number+2]
     },[number])
+    // const getItems = ()=>{
+    //     return [number,number+1,number+2]
+    // },[number])
     const theme = {
         backgroundColor : dark ? '#333' : '#FFF',
         color : dark ? '#FFF' : '#333'
