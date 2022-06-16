@@ -30,7 +30,7 @@ import Lifecycle from './Lifecycle'
 
 ReactDOM.render(
     <>
-        {/* <App /> */}
+        <App />
         {/* <Lifecycle/> */}
     </>
     ,document.getElementById('root')
