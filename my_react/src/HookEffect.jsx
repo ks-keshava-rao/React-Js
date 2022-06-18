@@ -4,9 +4,6 @@
 //combination of componentDidMount , componentDidUpdate, and ComponentWillUnmount
 //empty dependency array means componentdidmount and happes only once
 import React, { useState, useEffect} from 'react';
-
-
-
 function HookEffect() {
   //useState returns Current data and updated function
   const [count,setCount] = useState(0);
