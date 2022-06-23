@@ -18,7 +18,7 @@ const Navbar2 = (props) => {
                             return(
                             <ul className="navbar-nav mr-auto">
                                 <li   key={tab.pageName} className="nav-item active">
-                                    {console.log(tab.path,tab.pageName)}
+                                    {/* {console.log(tab.path,tab.pageName)} */}
                                     <NavLink className="nav-link" to={tab.path}>{tab.pageName} <span className="sr-only"></span></NavLink>
                                 </li>
                             </ul>
