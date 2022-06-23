@@ -30,12 +30,12 @@ const Signup = () => {
                 <form onSubmit={HandleSubmit}>
                     
                     <div className="form-group py-2">
-                        <label >Roll Number</label>
+                        <label >ID no.</label>
                         <input type="text" 
                         className="form-control" 
                         id="exampleInputrollno" 
                         name='rollNumber' 
-                        placeholder="Enter Roll no" 
+                        placeholder="Enter ID no." 
                         required
                         autoComplete = 'off'
                         value={userData.rollNumber}
