@@ -62,11 +62,15 @@ function App() {
       path : "/editdata"
     },
     {
+      pageName : "register",
+      path : "/signup"
+    },
+    {
       pageName : "Logout",
       path : "/logout"
     },
   ]
-  const currentNavDisplay = prelogin  
+  const currentNavDisplay = prelogin 
   return (
     <Router>
       <Navbar2 Navdisplay = {currentNavDisplay}/>
