@@ -1,8 +1,9 @@
-const StudentData = [
-    
-]
-const ClearUpAllData = () =>{
-    StudentData.splice(0,StudentData.length)
+import React from 'react'
+import StudentData from './StudentStore'
+import { useState } from 'react'
+const Authdata = async(data) => {
+  console.log(StudentData)
+  console.log(data);
 }
-export default StudentData;
-export {ClearUpAllData};
+
+export default Authdata
