@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import StudentData,{ClearUpAllData} from '../../store/authdata'
+import StudentData,{ClearUpAllData} from '../../store/StudentStore'
 const Signup = () => {
     const initialState = {
         rollNumber : "",
@@ -28,7 +28,7 @@ const Signup = () => {
             <div className="container-sm">
                 <br /> <br />
                 <form onSubmit={HandleSubmit}>
-                    
+                    {console.log(StudentData)}
                     <div className="form-group py-2">
                         <label >ID no.</label>
                         <input type="text" 
