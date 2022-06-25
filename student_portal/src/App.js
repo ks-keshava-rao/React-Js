@@ -70,7 +70,10 @@ function App() {
       path : "/logout"
     },
   ]
-  const currentNavDisplay = prelogin 
+  const togglefunction = (user) => {
+    return 
+  }
+  const currentNavDisplay = postLoginAdmin //togglefunction() 
   return (
     <Router>
       <Navbar2 Navdisplay = {currentNavDisplay}/>
