@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 const Navbar2 = (props) => {
     // const navdata = props.Navdisplay
+    let id = 1;
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         {/* {console.log(props)}
@@ -17,7 +18,7 @@ const Navbar2 = (props) => {
                         props.Navdisplay.map((tab) => {
                             return(
                             <ul className="navbar-nav mr-auto">
-                                <li   key={tab.pageName} className="nav-item active">
+                                <li   key={id++} className="nav-item active">
                                     {/* {console.log(tab.path,tab.pageName)} */}
                                     <NavLink className="nav-link" to={tab.path}>{tab.pageName} <span className="sr-only"></span></NavLink>
                                 </li>
