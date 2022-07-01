@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import StudentData,{ClearUpAllData} from '../../store/StudentStore'
+import axios from 'axios'
 const Signup = () => {
     const initialState = {
         rollNumber : "",
@@ -18,9 +19,15 @@ const Signup = () => {
     const HandleSubmit= (e)=> {
         e.preventDefault();
         const newRecord = {...userData};
-        StudentData.push(newRecord);
-        console.log(newRecord);
-        console.table(StudentData);
+        // StudentData.push(newRecord);
+        // console.log(newRecord);
+        axios.post('http://localhost:8080/register',newRecord)
+        .then((respose)=>{
+            console.log(respose.data);
+        })
+        .catch((error)=>{
+            console.error(error)
+        })
         setData(initialState);
     }
     return (
@@ -28,9 +35,8 @@ const Signup = () => {
             <div className="container-sm">
                 <br /> <br />
                 <form onSubmit={HandleSubmit}>
-                    {console.log(StudentData)}
                     <div className="form-group py-2">
-                        <label >ID no.</label>
+                        <label >Roll No.</label>
                         <input type="text" 
                         className="form-control" 
                         id="exampleInputrollno" 
