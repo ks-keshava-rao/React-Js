@@ -3,8 +3,9 @@ const router = express.Router();
 users = [
   {
     "studentName" : "keshav",
-    "rollNo" : "123456",
-    "password" : "password"
+    "rollNumber" : "123456",
+    "password" : "password",
+    "Useremail" : "kskrao@gmail.com"
   }
 ]
 /* GET home page. */
@@ -13,9 +14,9 @@ router.get('/', function(req, res, next) {
 });
 router.post('/login',(req,res,next)=>{
    let result = users.find((user)=>{
-    console.log(user.rollNo)
+    console.log(user.rollNumber)
     console.log(req.body.idNumber)
-    return (user.rollNo == req.body.idNumber)
+    return (user.rollNumber == req.body.idNumber)
    });
    console.log(result)
    if(result){
@@ -38,5 +39,12 @@ router.post('/login',(req,res,next)=>{
       message : "user not found",
     })
    }
+})
+
+router.post('/register',(req,res,next)=>{
+  console.log(req.body);
+  res.send(req.body);
+  
+  
 })
 module.exports = router;
