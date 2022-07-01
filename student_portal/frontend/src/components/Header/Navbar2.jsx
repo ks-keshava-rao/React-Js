@@ -1,14 +1,15 @@
 import React,{useContext} from 'react'
 import { NavLink } from 'react-router-dom'
 import NavbarContext from '../context/NavContext';
-const Navbar2 = (props) => {
-    // const navdata = props.Navdisplay
+const Navbar2 = () => {
+    const retreivedNav = useContext(NavbarContext)
+    
     let id = 1;
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         {/* {console.log(props)}
         {console.log(navdata)} */}
-        {console.log(useContext(NavbarContext))}
+        {/* {console.log(retreivedNav.navbarchoice)} */}
             <div className='container'>
                 <NavLink className="navbar-brand" to="/">Welcome</NavLink>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,7 +17,7 @@ const Navbar2 = (props) => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     {
-                        props.Navdisplay.map((tab) => {
+                        retreivedNav.navbarchoice.map((tab) => {
                             return(
                             <ul className="navbar-nav mr-auto">
                                 <li   key={id++} className="nav-item active">
