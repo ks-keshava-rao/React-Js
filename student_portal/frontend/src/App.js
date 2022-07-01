@@ -11,9 +11,9 @@ import Attendance from './components/common/Attendance';
 import Logout from './components/common/Logout';
 import EditData from './components/Admin/EditData';
 import NavbarState from './components/context/NavState';
-import {useContext} from 'react'
+import { useContext } from 'react'
 import NavbarContext from './components/context/NavContext';
-
+import Studentstate from './components/context/studentState';
 // const prelogin = [
 //   {
 //     pageName: "Home",
@@ -74,39 +74,29 @@ import NavbarContext from './components/context/NavContext';
 //     path: "/logout"
 //   },
 // ]
-// const togglefunction = () => {
-//   console.log(studentAuth)
-//   if (studentAuth) {
-//     return prelogin;
-//   }
-//   else {
-//     return postLoginStudent;
-//   }
-// }
 function App() {
 
-   const toggle = useContext(NavbarContext)
-   console.log( useContext(NavbarContext))
   return (
     <>
-    <NavbarState>
-      <Router>
-        
-        <Navbar2 Navdisplay={toggle} />
-        <Routes>
-          <Route exact path='/' element={<Home />} />
-          <Route exact path='/studenthome' element={<Home studentname="xyz" />} />
-          <Route exact path='/login' element={<Login />} />
-          <Route exact path='/logout' element={<Logout />} />
-          <Route exact path='/signup' element={<Signup />} />
-          <Route exact path='/marks' element={<Marks />} />
-          <Route exact path='/attendance' element={<Attendance />} />
-          <Route exact path='/attendance_edit' element={<Attendance />} />
-          <Route exact path='/marks_edit' element={<Marks />} />
-          <Route exact path='/editdata' element={<EditData />} />
-        </Routes>
-      </Router>
-    </NavbarState>
+      <Studentstate>
+        <NavbarState>
+          <Router>
+            <Navbar2 />
+            <Routes>
+              <Route exact path='/' element={<Home />} />
+              <Route exact path='/studenthome' element={<Home studentname="xyz" />} />
+              <Route exact path='/login' element={<Login />} />
+              <Route exact path='/logout' element={<Logout />} />
+              <Route exact path='/signup' element={<Signup />} />
+              <Route exact path='/marks' element={<Marks />} />
+              <Route exact path='/attendance' element={<Attendance />} />
+              <Route exact path='/attendance_edit' element={<Attendance />} />
+              <Route exact path='/marks_edit' element={<Marks />} />
+              <Route exact path='/editdata' element={<EditData />} />
+            </Routes>
+          </Router>
+        </NavbarState>
+      </Studentstate>
     </>
   );
 }
