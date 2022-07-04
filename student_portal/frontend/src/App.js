@@ -47,33 +47,7 @@ import Studentstate from './components/context/studentState';
 //     path: "/logout"
 //   },
 // ]
-// const postLoginAdmin = [
-//   {
-//     pageName: "Home",
-//     path: '/'
-//   },
-//   {
-//     pageName: "Edit Marks",
-//     path: "/marks_edit"
-//   },
-//   {
-//     pageName: "Edit Attendance",
-//     path: "/attendance_edit"
-//   },
-
-//   {
-//     pageName: "Edit Details",
-//     path: "/editdata"
-//   },
-//   {
-//     pageName: "register",
-//     path: "/signup"
-//   },
-//   {
-//     pageName: "Logout",
-//     path: "/logout"
-//   },
-// ]
+// 
 function App() {
 
   return (
