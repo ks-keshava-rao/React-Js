@@ -23,7 +23,13 @@ const Signup = () => {
         // console.log(newRecord);
         axios.post('http://localhost:8080/register',newRecord)
         .then((respose)=>{
-            console.log(respose.data);
+            console.log(respose.data.userdata);
+            console.log(respose.data.message);
+            if(!respose.data.found){
+                alert(respose.data.message);
+            }else{
+                alert(respose.data.message);
+            }
         })
         .catch((error)=>{
             console.error(error)
