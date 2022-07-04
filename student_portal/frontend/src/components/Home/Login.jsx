@@ -6,11 +6,11 @@ import Navbar2 from '../Header/Navbar2';
 import NavbarContext from '../context/NavContext';
 import Studentcontext from '../context/studentContext';
 const Login = () => {
-    const studd = useContext(Studentcontext);
+    const studentinstance = useContext(Studentcontext);
     const navigate = useNavigate();
     const navstate = useContext(NavbarContext);
     const postLoginStudent = [{
-        pageName: "Home", path: '/studenthome'},
+        pageName: "Home", path: '/'},
     {
         pageName: "Marks",path: '/marks'},
     {
@@ -18,7 +18,19 @@ const Login = () => {
     {
         pageName: "Logout", path: "/logout"},
     ]
-    
+    const postLoginAdmin = [{
+            pageName: "Home", path: '/'},
+          {
+            pageName: "Edit Marks",path: "/marks_edit"},
+          {
+            pageName: "Edit Attendance",path: "/attendance_edit"},
+          {
+            pageName: "Edit Details",path: "/editdata"},
+          {
+            pageName: "register",path: "/signup"},
+          {
+            pageName: "Logout",path: "/logout"},
+        ]
     const initialvalue = {
         idNumber: '',
         password: ''
@@ -42,6 +54,7 @@ const Login = () => {
         verifydata = { ...logindata, user: targetButton }
         // verifydata.user = targetButton
         console.log(verifydata)
+        if(verifydata.user==='studentsubmit'){
         axios.post('http://localhost:8080/login', verifydata)
             .then((response) => {
                 alert(response.data.message)
@@ -52,7 +65,7 @@ const Login = () => {
                     console.log(navstate);
                     navigate('/studenthome');
                     navstate.updatechoice(postLoginStudent);
-                    studd.updatestudentdetails(response.data.studentName)
+                    studentinstance.updatestudentdetails(response.data)
                     console.log(navstate.navbarchoice)
                 }
                 else alert("enter correct details")
@@ -62,6 +75,20 @@ const Login = () => {
                 console.error(error)
             })
         setLoginData(initialvalue)
+        }
+        else if(verifydata.user==='adminsubmit'){
+            console.log(verifydata.user)
+            console.log(verifydata)
+            axios.post("http://localhost:8080/adminlogin",verifydata)
+            .then((response)=>{
+                alert(response.data.message);
+                console.log(response.data);
+                if(response.data.auth===true){
+                    navstate.updatechoice(postLoginAdmin)
+                    navigate("/");
+                }
+            })
+        }
     }
     return (
         <div className="container-sm">
