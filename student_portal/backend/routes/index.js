@@ -1,11 +1,18 @@
 const express = require('express');
 const router = express.Router();
-users = [
+const users = [
   {
     "studentName" : "keshav",
     "rollNumber" : "123456",
     "password" : "password",
     "Useremail" : "kskrao@gmail.com"
+  }
+]
+const admindata = [
+  {
+    "adminID" : 4321,
+    "adminName" : "john",
+    "adminpass" : "adminpass"
   }
 ]
 /* GET home page. */
@@ -40,11 +47,57 @@ router.post('/login',(req,res,next)=>{
     })
    }
 })
+router.post('/adminlogin',(req,res,next)=>{
+   let adminfound = admindata.find((user)=>{
+    console.log(req.body.idNumber)
+    return (user.adminID == req.body.idNumber)
+   });
+   console.log(adminfound)
+   if(adminfound){
+    if(adminfound.adminpass==req.body.password){
+      res.status(200).send({
+        ...adminfound,
+        auth : true,
+        message : "admin Login successfull",
+      })
+    }else{
+      res.status(200).send({
+        auth:false,
+        message : "incorrect password"
+      })
+    }
+   }
+   else{
+    res.status(200).send({
+      auth:false,
+      message : "admin not found",
+    })
+   }
+})
 
 router.post('/register',(req,res,next)=>{
-  console.log(req.body);
-  res.send(req.body);
-  
-  
+  console.log(req.body);  
+
+  let foundrollnumber = users.find((user)=>{
+    return (req.body.rollNumber==user.rollNumber)
+  })
+  console.log(foundrollnumber);
+  if(foundrollnumber){
+    res.send({
+      found:true,
+      message:"user already registered"
+    }).status(200);
+  }
+  else{
+    users.push(req.body)
+    res.send({
+      userdata:users[users.length-1],
+      found :  false,
+      message : "student successfully registered"
+    }).status(200);
+  }
+})
+router.get('/getallusers',(req,res)=>{
+  res.send(users)
 })
 module.exports = router;
