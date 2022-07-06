@@ -16,6 +16,7 @@ import NavbarContext from './components/context/NavContext';
 import Studentstate from './components/context/studentState';
 import ProtectedRoutes from './components/Private/ProtectedRoutes';
 import Userstate from './components/context/Userstate';
+import Notfound from './components/NotFound/Notfound';
 function App() {
 
   return (
@@ -28,6 +29,7 @@ function App() {
               <Routes>
                 <Route exact path='/' element={<Home />} />
                 <Route exact path='/login' element={<Login />} />
+                <Route exact path='*' element={<Notfound />} />
                 <Route element={<ProtectedRoutes />}>
                   <Route exact path='/marks' element={<Marks />} />
                   <Route exact path='/attendance' element={<Attendance />} />
