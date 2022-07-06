@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import axios from 'axios';
-import Navbar2 from '../Header/Navbar2';
 import NavbarContext from '../context/NavContext';
 import Studentcontext from '../context/studentContext';
+import Userauth from '../context/Userauth';
 const Login = () => {
     const studentinstance = useContext(Studentcontext);
     const navigate = useNavigate();
     const navstate = useContext(NavbarContext);
+    const authstate = useContext(Userauth);
+    console.log(authstate.AUTH_STATUS);
+    
     const postLoginStudent = [{
         pageName: "Home", path: '/'},
     {
@@ -61,12 +64,17 @@ const Login = () => {
                 console.log(response.status)
                 console.log(response.data)
                 // console.log(response.data.studentName)
+                if(response.data.auth){
+                    authstate.UPDATE_AUTH({USER_AUTH:true,ADMIN_AUTH:false})
+                }
                 if (response.data.auth===true) {
-                    console.log(navstate);
-                    navigate('/studenthome');
+                    // console.log(navstate);
+                    navigate('/');
                     navstate.updatechoice(postLoginStudent);
-                    studentinstance.updatestudentdetails(response.data)
-                    console.log(navstate.navbarchoice)
+                    studentinstance.updatestudentdetails(response.data);
+                    
+                    // console.log(navstate.navbarchoice)
+                    console.log(authstate.AUTH_STATUS)
                 }
                 else alert("enter correct details")
 
@@ -88,6 +96,10 @@ const Login = () => {
                     navigate("/");
                 }
             })
+            .catch((error)=>{
+                console.error(error);
+            })
+            setLoginData(initialvalue);
         }
     }
     return (
