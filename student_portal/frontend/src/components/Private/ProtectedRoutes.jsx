@@ -6,7 +6,7 @@ const ProtectedRoutes = () => {
     const currentauth = useContext(Userauth);
     console.log(currentauth.AUTH_STATUS.USER_AUTH)
   return (
-       currentauth.AUTH_STATUS.USER_AUTH ? <Outlet/> : <Navigate to='/login'/>
+       true ? <Outlet/> : <Navigate to='/login'/>
   )
 }
 
