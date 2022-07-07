@@ -3,9 +3,27 @@ const router = express.Router();
 const users = [
   {
     "studentName" : "keshav",
-    "rollNumber" : "123456",
+    "rollNumber" : "111",
     "password" : "password",
     "Useremail" : "kskrao@gmail.com"
+  },
+  {
+    "studentName" : "aa",
+    "rollNumber" : "112",
+    "password" : "password",
+    "Useremail" : "aa@gmail.com"
+  },
+  {
+    "studentName" : "bb",
+    "rollNumber" : "113",
+    "password" : "password",
+    "Useremail" : "bb@gmail.com"
+  },
+  {
+    "studentName" : "cc",
+    "rollNumber" : "114",
+    "password" : "password",
+    "Useremail" : "cc@gmail.com"
   }
 ]
 const admindata = [
@@ -97,7 +115,7 @@ router.post('/register',(req,res,next)=>{
     }).status(200);
   }
 })
-router.get('/getallusers',(req,res)=>{
+router.get('/usersdata',(req,res)=>{
   res.send(users)
 })
 module.exports = router;
