@@ -1,7 +1,12 @@
 import React from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
 // import Navbar from './components/Navbar';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter 
+  as 
+  Router, 
+  Route, 
+  Routes } 
+  from 'react-router-dom'
 import Signup from './components/Admin/Signup';
 import Login from './components/Home/Login';
 import Home from './components/Home/Home';
@@ -17,6 +22,8 @@ import Studentstate from './components/context/studentState';
 import ProtectedRoutes from './components/Private/ProtectedRoutes';
 import Userstate from './components/context/Userstate';
 import Notfound from './components/NotFound/Notfound';
+import Edit from './components/Admin/Edit';
+import View from './components/Admin/View';
 function App() {
 
   return (
@@ -37,6 +44,8 @@ function App() {
                   <Route exact path='/signup' element={<Signup />} />
                   <Route exact path='/marks_edit' element={<Marks />} />
                   <Route exact path='/editdata' element={<EditData />} />
+                  <Route exact path='/editdata/edit/:id' element={<Edit/>}/>
+                  <Route exact path='/editdata/:id' element={<View/>}/>
                 </Route>
               </Routes>
             </Router>
