@@ -14,12 +14,15 @@ const EditData = () => {
     setUser(result.data)
   }
   console.log(users)
+  const deleteuser = () =>{
+    console.log('deleted')
+  }
   return (
     <>
       <div className='container'>
         <div className='py-4'>
           <table className="table border shadow">
-            <thead className='thead-dark'>
+            <thead className='bg-dark text-white'>
               <tr>
                 <th scope='col'>Sno.</th>
                 <th scope='col'>Roll Number</th>
@@ -36,7 +39,12 @@ const EditData = () => {
                     <td scope='row'>{index+1}</td>
                     <td>{user.rollNumber}</td>
                     <td>{user.studentName}</td>
-                    <td>{user.Usermail}</td>
+                    <td>{user.Useremail}</td>
+                    <td>
+                      <Link className='btn btn-primary m-2' to={`/editdata/${user.rollNumber}`}>view</Link>
+                      <Link className='btn btn-outline-primary mr-2' to='/editdata/edit/:id' >Edit</Link>
+                      <button className='btn btn-danger m-2'>Delete</button>
+                    </td>
                   </tr>
                 ))
               }
