@@ -17,10 +17,10 @@ const Navbar2 = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     {
-                        retreivedNav.navbarchoice.map((tab) => {
+                        retreivedNav.navbarchoice.map((tab,index) => {
                             return(
-                            <ul className="navbar-nav mr-auto">
-                                <li   key={id++} className="nav-item active">
+                            <ul key={index} className="navbar-nav mr-auto">
+                                <li    className="nav-item active">
                                     {/* {console.log(tab.path,tab.pageName)} */}
                                     <NavLink className="nav-link" to={tab.path}>{tab.pageName} <span className="sr-only"></span></NavLink>
                                 </li>
