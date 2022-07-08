@@ -118,4 +118,8 @@ router.post('/register',(req,res,next)=>{
 router.get('/usersdata',(req,res)=>{
   res.send(users)
 })
+router.get('/student/:id',(req,res)=>{
+  res.send(req.params.id);
+  res.send();
+})
 module.exports = router;
