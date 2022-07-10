@@ -6,7 +6,8 @@ const Navbar2 = () => {
     
     let id = 1;
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-primary bg-gradient
+        sticky-top">
         {/* {console.log(props)}
         {console.log(navdata)} */}
         {/* {console.log(retreivedNav.navbarchoice)} */}

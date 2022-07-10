@@ -5,7 +5,7 @@ import axios from 'axios'
 const Signup = () => {
     const initialState = {
         rollNumber : "",
-        UserEmail : "",
+        Useremail : "",
         studentName : "",
         password : ""
     }
@@ -38,39 +38,40 @@ const Signup = () => {
     }
     return (
         <>
-            <div className="container-sm">
-                <br /> <br />
+            <div className="container">
+                <div className="w-75 mx-auto shadow p-5">
+                <h2 className="text-center mb-4">Add new student</h2>
                 <form onSubmit={HandleSubmit}>
-                    <div className="form-group py-2">
-                        <label >Roll No.</label>
+                    <div className="form-group mb-4">
+                        <label ><h6>Roll No.</h6></label>
                         <input type="text" 
-                        className="form-control" 
+                        className="form-control form-control-lg" 
                         id="exampleInputrollno" 
                         name='rollNumber' 
-                        placeholder="Enter ID no." 
+                        placeholder="Enter roll number" 
                         required
                         autoComplete = 'off'
                         value={userData.rollNumber}
                         onChange={HandleInputs}
                          />
                     </div>
-                    <div className="form-group py-2" >
-                        <label >Email</label>
+                    <div className="form-group mb-4" >
+                        <label > <h6>Email</h6></label>
                         <input type="text" 
-                        className="form-control" 
+                        className="form-control form-control-lg" 
                         id="exampleInputemail"
                          placeholder="Enter email address" 
-                         name='UserEmail'
+                         name='Useremail'
                          required
                          autoComplete = 'off'
-                         value={userData.UserEmail}
+                         value={userData.Useremail}
                          onChange={HandleInputs}
                          />
                     </div>
-                    <div className="form-group py-2" >
-                        <label >Student name</label>
+                    <div className="form-group mb-4" >
+                        <label > <h6> Student name </h6></label>
                         <input type="text" 
-                        className="form-control" 
+                        className="form-control form-control-lg" 
                         id="exampleInputname"
                          placeholder="Enter name" 
                          name='studentName'
@@ -80,10 +81,10 @@ const Signup = () => {
                          onChange={HandleInputs}
                          />
                     </div>
-                    <div className="form-group py-2" >
-                        <label >Password</label>
+                    <div className="form-group mb-4" >
+                        <label > <h6>Password</h6> </label>
                         <input type="password" 
-                        className="form-control" 
+                        className="form-control form-control-lg" 
                         id="exampleInputPassword1" 
                         placeholder="Password" 
                         required
@@ -93,11 +94,14 @@ const Signup = () => {
                         onChange={HandleInputs}
                          />
                          
-                    </div> <br />
+                    </div> 
+                    <div class="d-grid gap-2 col-13 mx-auto">
                     <button type="submit"
                      className="btn btn-primary">Submit data
                     </button>
+                    </div>
                 </form>
+                </div>
             </div>
         </>
     )

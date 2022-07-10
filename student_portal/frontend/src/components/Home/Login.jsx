@@ -5,6 +5,7 @@ import axios from 'axios';
 import NavbarContext from '../context/NavContext';
 import Studentcontext from '../context/studentContext';
 import Userauth from '../context/Userauth';
+import { Link } from 'react-router-dom';
 const Login = () => {
     const studentinstance = useContext(Studentcontext);
     const navigate = useNavigate();
@@ -29,16 +30,16 @@ const Login = () => {
         pageName: "Home", path: '/'
     },
     {
-        pageName: "Edit Marks", path: "/marks_edit"
+        pageName: "Marks", path: "/marks_edit"
     },
     {
-        pageName: "Edit Attendance", path: "/attendance_edit"
+        pageName: "Attendance", path: "/attendance_edit"
     },
     {
-        pageName: "Edit Details", path: "/editdata"
+        pageName: "Student Details", path: "/editdata"
     },
     {
-        pageName: "register", path: "/signup"
+        pageName: "Add Student", path: "/signup"
     },
     {
         pageName: "Logout", path: "/logout"
@@ -49,6 +50,7 @@ const Login = () => {
         password: ''
     }
     const [logindata, setLoginData] = useState(initialvalue);
+    const [toggle, setToggle] = useState(false);
     let verifydata;
     const HandleLoginInputs = (event) => {
         const name = event.target.name;
@@ -113,14 +115,21 @@ const Login = () => {
         }
     }
     return (
-        <div className="container">
+
+        <div className="container border">
             <div className='py-4 '>
+
                 <br /> <br />
                 <form name='loginform'>
                     <div className="row justify-content-md-center">
                         <div className='col-3'>
+                            <div className='py-3'>
+                                <div className='text-center text-primary text-secondary'>
+                                    <h1>Login</h1>
+                                </div>
+                            </div>
                             <div className="form-group py-2">
-                                <label >Roll No or ID No.</label>
+                                <label className='form-label'>Roll No or ID No.</label>
                                 <input type="text" value={logindata.idNumber}
                                     name='idNumber'
                                     autoComplete='off'
@@ -132,25 +141,28 @@ const Login = () => {
                                     required />
                             </div>
                             <div className="form-group py-2">
-                                <label >Password</label>
+                                <label className='form-label text-center' >Password</label>
                                 <input type="password"
                                     value={logindata.password}
                                     name='password'
                                     onChange={HandleLoginInputs}
-                                    className="form-control"
+                                    className="form-control form-control-warning"
                                     id="exampleInputPassword1"
                                     placeholder="Password"
                                     required />
                             </div> <br />
-                            <div className="container">
+                            <div class="d-grid gap-2 d-md-block ms-4">
                                 <button name='studentsubmit'
                                     onClick={HandleLogin}
                                     id='studentbtn'
-                                    className="btn btn-success m-1">Login</button>
+                                    className="btn btn-success m-1 ">Login</button>
                                 <button name='adminsubmit'
                                     onClick={HandleLogin}
                                     id='adminbtn'
                                     className="btn btn-danger ">Login as Admin</button>
+                            </div>
+                            <div className="col text-center py-3">
+                                <Link to='/passrequest'>Forgot password?</Link>
                             </div>
                         </div>
                     </div>
