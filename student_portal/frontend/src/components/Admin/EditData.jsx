@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useEffect } from 'react'
+
 const EditData = () => {
   const [users, setUser] = useState([])
   useEffect(() => {
@@ -20,6 +21,7 @@ const EditData = () => {
   return (
     <>
       <div className='container'>
+      <h2 className="text-center mt-4">Edit student details</h2>
         <div className='py-4'>
           <table className="table border shadow">
             <thead className='bg-dark text-white'>
@@ -31,7 +33,7 @@ const EditData = () => {
                 <th scope='col'>Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody >
               {
                 users.map((user, index) => 
                   (
@@ -41,13 +43,12 @@ const EditData = () => {
                     <td>{user.studentName}</td>
                     <td>{user.Useremail}</td>
                     <td>
-                      <Link className='btn btn-primary m-2' to={`/editdata/${user.rollNumber}`}>view</Link>
-                      <Link className='btn btn-outline-primary mr-2' to='/editdata/edit/:id' >Edit</Link>
-                      <button className='btn btn-danger m-2'>Delete</button>
+                      <Link className='btn btn-primary bg-gradient me-2' to={`/editdata/${user.rollNumber}`}>View</Link>
+                      <Link className='btn btn-outline-primary me-2' to={`/editdata/edit/${user.rollNumber}`}>Edit</Link>
+                      <button className='btn btn-danger bg-gradient me'>Delete</button>
                     </td>
                   </tr>
-                ))
-              }
+                ))}
             </tbody>
           </table>
         </div>
