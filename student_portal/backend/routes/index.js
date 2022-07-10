@@ -119,7 +119,17 @@ router.get('/usersdata',(req,res)=>{
   res.send(users)
 })
 router.get('/student/:id',(req,res)=>{
-  res.send(req.params.id);
-  res.send();
+  console.log(req.params.id);
+  const {id} = req.params;
+  // res.send(id).status(200)
+  const userdata = users.find((user)=>{
+    return(user.rollNumber === id)
+  })
+  if(userdata){
+    res.send(userdata).status(200)
+  }
+  else{
+    res.send({message:"user not found"}).status(404)
+  }
 })
 module.exports = router;
