@@ -6,7 +6,12 @@ import NavbarContext from '../context/NavContext';
 import Studentcontext from '../context/studentContext';
 import Userauth from '../context/Userauth';
 import { Link } from 'react-router-dom';
+import AdminContext from '../context/AdminContext';
+import DisplayNamecontext from '../context/DisplayNamecontext';
+
 const Login = () => {
+    const {admindata,updateadmin} = useContext(AdminContext);
+    const {displayname,updatename} = useContext(DisplayNamecontext);
     const studentinstance = useContext(Studentcontext);
     const navigate = useNavigate();
     const navstate = useContext(NavbarContext);
@@ -39,10 +44,7 @@ const Login = () => {
         pageName: "Student Details", path: "/editdata"
     },
     {
-        pageName: "Add Student", path: "/signup"
-    },
-    {
-        pageName: "Logout", path: "/logout"
+        pageName: "Profile", path: "/logout"
     },
     ]
     const initialvalue = {
@@ -83,9 +85,8 @@ const Login = () => {
                         // console.log(navstate);
                         navigate('/');
                         navstate.updatechoice(postLoginStudent);
-                        studentinstance.updatestudentdetails(response.data);
-
-                        // console.log(navstate.navbarchoice)
+                        studentinstance.updatestudentdetails(response.data.loggedData);
+                        updatename(response.data.loggedData.studentName);
                         console.log(authstate.AUTH_STATUS)
                     }
                     else alert("enter correct details")
@@ -103,8 +104,13 @@ const Login = () => {
                 .then((response) => {
                     alert(response.data.message);
                     console.log(response.data);
+                    if (response.data.auth) {
+                        authstate.UPDATE_AUTH({ USER_AUTH: false, ADMIN_AUTH: true })
+                    }
                     if (response.data.auth === true) {
-                        navstate.updatechoice(postLoginAdmin)
+                        navstate.updatechoice(postLoginAdmin);
+                        updateadmin(response.data.loggedData)
+                        updatename(response.data.loggedData.adminName);
                         navigate("/");
                     }
                 })
@@ -116,10 +122,11 @@ const Login = () => {
     }
     return (
 
-        <div className="container border">
+        <div className="container">
             <div className='py-4 '>
 
                 <br /> <br />
+                <div className="container-sm w-80 border">
                 <form name='loginform'>
                     <div className="row justify-content-md-center">
                         <div className='col-3'>
@@ -151,7 +158,7 @@ const Login = () => {
                                     placeholder="Password"
                                     required />
                             </div> <br />
-                            <div class="d-grid gap-2 d-md-block ms-4">
+                            <div className="d-grid gap-2 d-md-block ms-4">
                                 <button name='studentsubmit'
                                     onClick={HandleLogin}
                                     id='studentbtn'
@@ -167,6 +174,7 @@ const Login = () => {
                         </div>
                     </div>
                 </form>
+                </div>
             </div>
         </div>
     )

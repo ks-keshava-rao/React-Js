@@ -4,10 +4,7 @@ import { useState } from "react";
 
 const Studentstate = (props) => {
     const defaultdetails = {
-        Useremail: " ",
-        password: " ",
-        rollNumber: " ",
-        studentName: " ",
+       
     }
     const [studentdetails, updatestudentdetails] = useState(defaultdetails);
     return (

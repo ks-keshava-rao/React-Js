@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useEffect } from 'react'
-
+import { FaRegEye, FaUserAlt, FaPen, FaTrashAlt, FaUserPlus } from "react-icons/fa";
 const EditData = () => {
   const [users, setUser] = useState([])
   useEffect(() => {
@@ -15,17 +15,22 @@ const EditData = () => {
     setUser(result.data)
   }
   console.log(users)
-  const deleteuser = () =>{
-    console.log('deleted')
+  const deleteuser = (id) => {
+    const response = await axios.delete(`http://localhost:8080/deleteuser/${id}`)
   }
   return (
     <>
+
       <div className='container'>
-      <h2 className="text-center mt-4">Edit student details</h2>
+        <div className="fixed">
+        <Link className="btn btn-primary position-relative " style={{ 'float': 'right', "margin": '16px' }} to='/signup'>Add <FaUserPlus /></Link>
+        <h2 className="text-center mt-4">Students data  </h2>
+        </div>
+
         <div className='py-4'>
           <table className="table border shadow">
             <thead className='bg-dark text-white'>
-              <tr>
+              <tr style={{ textAlign: 'center' }}>
                 <th scope='col'>Sno.</th>
                 <th scope='col'>Roll Number</th>
                 <th scope='col'>Student Name</th>
@@ -35,17 +40,17 @@ const EditData = () => {
             </thead>
             <tbody >
               {
-                users.map((user, index) => 
-                  (
-                  <tr key={index}>
-                    <td scope='row'>{index+1}</td>
+                users.map((user, index) =>
+                (
+                  <tr key={index} style={{ textAlign: 'center' }} >
+                    <td scope='row'>{index + 1}</td>
                     <td>{user.rollNumber}</td>
                     <td>{user.studentName}</td>
                     <td>{user.Useremail}</td>
-                    <td>
-                      <Link className='btn btn-primary bg-gradient me-2' to={`/editdata/${user.rollNumber}`}>View</Link>
-                      <Link className='btn btn-outline-primary me-2' to={`/editdata/edit/${user.rollNumber}`}>Edit</Link>
-                      <button className='btn btn-danger bg-gradient me'>Delete</button>
+                    <td >
+                      <Link className='btn btn-success me-2' to={`/editdata/${user.rollNumber}`}><FaUserAlt /></Link>
+                      <Link className='btn btn-outline-primary me-2' to={`/editdata/edit/${user.rollNumber}`}><FaPen /></Link>
+                      <button className='btn btn-danger bg-gradient' onClick={()=>deleteuser(user.rollNumber)}><FaTrashAlt /></button>
                     </td>
                   </tr>
                 ))}

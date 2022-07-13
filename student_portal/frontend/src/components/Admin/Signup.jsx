@@ -95,9 +95,9 @@ const Signup = () => {
                          />
                          
                     </div> 
-                    <div class="d-grid gap-2 col-13 mx-auto">
+                    <div className="d-grid gap-2 col-13 mx-auto">
                     <button type="submit"
-                     className="btn btn-primary">Submit data
+                     className="btn btn-primary btn-primary">Submit data
                     </button>
                     </div>
                 </form>
