@@ -8,7 +8,7 @@ import Userauth from '../context/Userauth';
 import { Link } from 'react-router-dom';
 import AdminContext from '../context/AdminContext';
 import DisplayNamecontext from '../context/DisplayNamecontext';
-
+import { MdOutlineLogin,MdAdminPanelSettings } from "react-icons/md";
 const Login = () => {
     const {admindata,updateadmin} = useContext(AdminContext);
     const {displayname,updatename} = useContext(DisplayNamecontext);
@@ -28,7 +28,7 @@ const Login = () => {
         pageName: "Attendance", path: "/attendance"
     },
     {
-        pageName: "Logout", path: "/logout"
+        pageName: "Profile", path: "/logout"
     },
     ]
     const postLoginAdmin = [{
@@ -158,15 +158,15 @@ const Login = () => {
                                     placeholder="Password"
                                     required />
                             </div> <br />
-                            <div className="d-grid gap-2 d-md-block ms-4">
+                            <div className="col-sm-12 text-center mt-1">
                                 <button name='studentsubmit'
                                     onClick={HandleLogin}
                                     id='studentbtn'
-                                    className="btn btn-success m-1 ">Login</button>
+                                    className="btn btn-success m-1 ">Login <MdOutlineLogin/></button>
                                 <button name='adminsubmit'
                                     onClick={HandleLogin}
                                     id='adminbtn'
-                                    className="btn btn-danger ">Login as Admin</button>
+                                    className="btn btn-danger ">Login as Admin <MdAdminPanelSettings/></button>
                             </div>
                             <div className="col text-center py-3">
                                 <Link to='/passrequest'>Forgot password?</Link>

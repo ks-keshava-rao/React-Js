@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useContext } from 'react'
@@ -7,11 +8,17 @@ import AdminContext from '../context/AdminContext'
 import Studentcontext from '../context/studentContext'
 import Userauth from '../context/Userauth'
 import { MdLogout,MdHome,MdPeopleAlt } from "react-icons/md";
+import NavbarContext from '../context/NavContext'
+import prelogin from '../../routes/NavRoute'
+import DisplayNamecontext from '../context/DisplayNamecontext'
 const Logout = () => {
+  const navigate = useNavigate();
   const profiledisplay = useRef({})
-  const { admindata } = useContext(AdminContext);
-  const { studentdetails } = useContext(Studentcontext);
+  const { admindata, updateadmin} = useContext(AdminContext);
+  const { studentdetails,updatestudentdetails } = useContext(Studentcontext);
   const { AUTH_STATUS, UPDATE_AUTH } = useContext(Userauth);
+  const {updatechoice} = useContext(NavbarContext);
+  const {displayname,updatename}=useContext(DisplayNamecontext);
   console.log(admindata, studentdetails);
   console.log(AUTH_STATUS)
 
@@ -21,8 +28,17 @@ const Logout = () => {
   else if (AUTH_STATUS.ADMIN_AUTH) {
     profiledisplay.current = admindata
   }
-
-
+  
+  const userlogout = () =>{
+    console.log('logout')
+    updateadmin({});
+    updatestudentdetails({});
+    UPDATE_AUTH({USER_AUTH : false,ADMIN_AUTH : false});
+    updatechoice(prelogin);
+    updatename("");
+    navigate('/login');
+  }
+  
   return (
     <>
       {/* {console.log(profiledisplay.current)} */}
@@ -40,7 +56,7 @@ const Logout = () => {
           </ul>
           <div className="col-sm-12 text-center mt-4">
           <Link className="btn btn-danger btn-md me-5" to='/' type="button">Home <MdHome/></Link>
-            <button className="btn btn-success btn-md ms-5" type="button">Logout <MdLogout/></button>
+            <button className="btn btn-success btn-md ms-5" onClick={()=>userlogout()} type="button">Logout <MdLogout/></button>
           </div>
         </div>
       </div>

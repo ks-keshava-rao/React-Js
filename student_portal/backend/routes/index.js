@@ -168,6 +168,16 @@ router.put('/updatedata/:id', (req, res) => {
   }
 })
 router.delete('/deleteuser/:id',(req,res)=>{
-  
+  const {id} = req.params
+  let foundid = users.findIndex((user) => {
+    return (id === user.rollNumber);
+  })
+  if(foundid>=0){
+    users.splice(foundid,1)
+    res.send({deleted:true}).status(200)
+  }
+  else{
+    res.send({message:"user not found"}).status(200);
+  }
 })
 module.exports = router;

@@ -7,9 +7,7 @@ const NavbarState = (props) =>{
         {
             pageName: "Home",path: '/'},
           {
-            pageName: "Login",path: '/login'},
-          {
-            pageName: "sample",path: '/sample'}
+            pageName: "Login",path: '/login'}
         ]
     const [navbarchoice,updatechoice] = useState(prelogin);
     return(

@@ -7,11 +7,15 @@ function Home(props) {
   const {displayname} = useContext(DisplayNamecontext);
   console.log(displayname);
   return (
+    <>
+    <div>
     <div className='container'>
             <br /> <br />
             <br /> <br />
-        <h1 className='text-center'>Welcome to Portal {displayname} </h1>
+        <h1 className=' display-4 text-center mt-9'>Welcome to Portal {displayname} </h1>
     </div>
+    </div>
+    </>
   )
 }
 

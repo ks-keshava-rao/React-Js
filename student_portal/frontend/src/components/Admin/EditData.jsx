@@ -15,8 +15,14 @@ const EditData = () => {
     setUser(result.data)
   }
   console.log(users)
-  const deleteuser = (id) => {
+  const deleteuser = async(id) => {
     const response = await axios.delete(`http://localhost:8080/deleteuser/${id}`)
+    if(response.data.deleted === true){
+      loadUsers();
+    }
+    else{
+      alert(response.data.message)
+    }
   }
   return (
     <>

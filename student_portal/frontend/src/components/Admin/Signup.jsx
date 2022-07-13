@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import StudentData,{ClearUpAllData} from '../../store/StudentStore'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 const Signup = () => {
     const initialState = {
         rollNumber : "",
@@ -97,8 +98,11 @@ const Signup = () => {
                     </div> 
                     <div className="d-grid gap-2 col-13 mx-auto">
                     <button type="submit"
-                     className="btn btn-primary btn-primary">Submit data
+                     className="btn  btn-gradient btn-primary">Submit data
                     </button>
+                    <Link 
+                     className="btn btn-gradient btn-danger" to='/editdata'>Cancel
+                    </Link>
                     </div>
                 </form>
                 </div>
