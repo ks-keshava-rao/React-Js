@@ -2,8 +2,9 @@ import React from 'react'
 import Container from '@material-ui/core/Container'
 import { TextField, Box, Typography, Paper, Grid, IconButton, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { FaPlusCircle, FaTrash,FaCheckSquare } from "react-icons/fa";
+import { FaPlusCircle, FaTrash, FaCheckSquare, FaAngleRight, FaPlus } from "react-icons/fa";
 import { useState } from 'react';
+import axios from 'axios';
 // import CheckBoxIcon from '@mui/icons-material/CheckBox';
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +27,8 @@ const Marks = () => {
     marks: ""
   }
   const [data, updatedata] = useState([template]);
+  const [visibility, setVisibility] = useState(false);
+  const [verifyroll,setRoll] = useState({rollNumber:""});
   const classes = useStyles();
   const addfield = () => {
     updatedata([...data, template])
@@ -44,32 +47,59 @@ const Marks = () => {
     filteredData.splice(index, 1);
     updatedata(filteredData);
   }
-  return (
+  const handleSubmiit = () =>{
+    console.log("submitted");
+  }
+  const verify = () => {
+    const verified = false;
+    if(verified){
+    setVisibility(true)
+    }
+    else{
+      setVisibility(false)
+    }
+  }
+  const handlecheck = (e) =>{
+    setRoll({...verifyroll,[e.target.name]:e.target.value})
+    console.log(verifyroll);
+  }
+  return ( 
     <Container className={classes.root}>
-      <Typography color='primary' align='center' variant='h3' gutterBottom>
+      <Typography color='primary' align='center' variant='h3' className='mb-4'>
         Enter marks
-        
+
       </Typography>
-      
-      <Grid container className='pb-4' spacing={6}>
-        <Grid item md={4}>
+
+      <Grid container className='pb-4' spacing={4}>
+        <Grid item md={3}>
           <TextField
-            InputLabelProps={{
-              classes: {
-                root: classes.label
-              }
-            }}
+            // InputLabelProps={{
+            //   classes: {
+            //     root: classes.label
+            //   }
+            // }}
             label='Roll number'
-            placeholder='Enter Roll number'
-            variant='outlined'
+            variant='filled'
             id='filled-basic'
             fullWidth
+            name='rollNumber'
+            onChange={(e)=>{handlecheck(e)}}
+            value = {verifyroll.rollNumber}
+            placeholder='Enter Roll number'
+
           />
-          <IconButton md={3}>
-        <FaCheckSquare />
-      </IconButton>
+
         </Grid>
+        <Grid item md={3}>
+          <IconButton size='medium' onClick={()=>verify()} color='primary' >
+            <FaCheckSquare />
+          </IconButton>
+        </Grid>
+
       </Grid>
+
+      { 
+      visibility ?
       <Paper component={Box} p={4} >
         {
           data.map((subdata, index) =>
@@ -82,7 +112,7 @@ const Marks = () => {
             >
               <Grid item md={4}>
                 <TextField
-                  label="Name"
+                  label="Subject"
                   placeholder='Enter subject name'
                   variant='filled'
                   id='filled-basic'
@@ -115,18 +145,38 @@ const Marks = () => {
             </Grid>
           ))
         }
-        <Box
-          justifyContent="center">
-          <Button
-            variant='contained'
-            className='m-5'
-            color="primary"
-            onClick={() => addfield()}
-          >Add field
-          </Button>
-        </Box>
+        <Grid container>
+          <Box
+            md={3}
+            justifyContent="center">
+            <Button
+              variant='contained'
+              className='m-5 mt-1'
+
+              color="primary"
+              onClick={() => addfield()}
+            >Add  <FaPlus />
+            </Button>
+          </Box>
+          <Box
+            justifyContent="center">
+            <Button
+              variant='contained'
+              className='m-1 mt-1'
+              color="primary"
+              onClick={() => handleSubmiit()}
+            >submit <FaAngleRight />
+            </Button>
+          </Box>
+        </Grid>
       </Paper>
+      :
+      <Typography color='secondary' align='center' variant='h5' className='mb-4'>
+        Verify Roll Number to continue....
+      </Typography>
+}
     </Container>
+      
   )
 }
 
