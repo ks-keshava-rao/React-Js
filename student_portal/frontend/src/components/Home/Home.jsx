@@ -2,7 +2,6 @@ import React from 'react'
 import Studentcontext from '../context/studentContext';
 import { useContext } from 'react';
 import DisplayNamecontext from '../context/DisplayNamecontext';
-import { FaReact } from "react-icons/fa";
 function Home(props) {
   const {studentdetails,updatestudentdetails} = useContext(Studentcontext);
   const {displayname} = useContext(DisplayNamecontext);
@@ -14,7 +13,7 @@ function Home(props) {
             <br /> <br />
             <br /> <br />
             
-        <h1 className=' display-4 text-center mt-9'> <FaReact/> Welcome to Portal {displayname} </h1>
+        <h1 className=' display-4 text-center mt-9'>  Welcome to Portal {displayname} </h1>
     </div>
     </div>
     </>
