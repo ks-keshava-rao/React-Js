@@ -1,8 +1,132 @@
 import React from 'react'
-
+import Container from '@material-ui/core/Container'
+import { TextField, Box, Typography, Paper, Grid, IconButton, Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { FaPlusCircle, FaTrash,FaCheckSquare } from "react-icons/fa";
+import { useState } from 'react';
+// import CheckBoxIcon from '@mui/icons-material/CheckBox';
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "90",
+    height: "90",
+    backgroundColor: theme.palette.grey[55],
+    paddingTop: theme.spacing(5),
+  },
+  inputFields: {
+    marginBottom: theme.spacing(1)
+  },
+  label: {
+    backgroundColor: "white"
+  }
+}));
 const Marks = () => {
+
+  const template = {
+    subject: "",
+    marks: ""
+  }
+  const [data, updatedata] = useState([template]);
+  const classes = useStyles();
+  const addfield = () => {
+    updatedata([...data, template])
+  }
+  const handleInput = (e, index) => {
+    const updatedData = data.map((element, location) => (
+      index === location
+        ? Object.assign(element, { [e.target.name]: e.target.value })
+        : element
+    ))
+    console.table(updatedData);
+    updatedata(updatedData);
+  }
+  const deletefield = (index) => {
+    const filteredData = [...data]
+    filteredData.splice(index, 1);
+    updatedata(filteredData);
+  }
   return (
-    <div>marks</div>
+    <Container className={classes.root}>
+      <Typography color='primary' align='center' variant='h3' gutterBottom>
+        Enter marks
+        
+      </Typography>
+      
+      <Grid container className='pb-4' spacing={6}>
+        <Grid item md={4}>
+          <TextField
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              }
+            }}
+            label='Roll number'
+            placeholder='Enter Roll number'
+            variant='outlined'
+            id='filled-basic'
+            fullWidth
+          />
+          <IconButton md={3}>
+        <FaCheckSquare />
+      </IconButton>
+        </Grid>
+      </Grid>
+      <Paper component={Box} p={4} >
+        {
+          data.map((subdata, index) =>
+          (
+            <Grid container
+              justifyContent="center"
+              key={index}
+              spacing={6}
+              className={classes.inputFields}
+            >
+              <Grid item md={4}>
+                <TextField
+                  label="Name"
+                  placeholder='Enter subject name'
+                  variant='filled'
+                  id='filled-basic'
+                  name='subject'
+                  fullWidth
+                  onChange={(e) => handleInput(e, index)}
+                  value={subdata.subject}
+                />
+              </Grid>
+              <Grid item md={4}>
+                <TextField
+                  label="Marks"
+                  placeholder='Enter marks'
+                  variant='filled'
+                  id='filled-basic'
+                  name='marks'
+                  fullWidth
+                  onChange={(e) => handleInput(e, index)}
+                  value={subdata.marks}
+                />
+              </Grid>
+              <Grid item className='pb-1' md={3}>
+                <IconButton
+                  color="secondary"
+                  onClick={() => deletefield(index)}
+                >
+                  <FaTrash />
+                </IconButton >
+              </Grid>
+            </Grid>
+          ))
+        }
+        <Box
+          justifyContent="center">
+          <Button
+            variant='contained'
+            className='m-5'
+            color="primary"
+            onClick={() => addfield()}
+          >Add field
+          </Button>
+        </Box>
+      </Paper>
+    </Container>
   )
 }
 

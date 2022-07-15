@@ -4,7 +4,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css'
 import {
   BrowserRouter
     as
-    Router,
+  Router,
   Route,
   Routes
 }
