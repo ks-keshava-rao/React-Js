@@ -1,6 +1,8 @@
 import React,{useContext} from 'react'
 import { NavLink } from 'react-router-dom'
 import NavbarContext from '../context/NavContext';
+import { FaReact } from "react-icons/fa";
+
 const Navbar2 = () => {
     const retreivedNav = useContext(NavbarContext)
     
@@ -12,7 +14,7 @@ const Navbar2 = () => {
         {console.log(navdata)} */}
         {/* {console.log(retreivedNav.navbarchoice)} */}
             <div className='container'>
-                <NavLink className="navbar-brand" to="/">Welcome</NavLink>
+                <NavLink className="navbar-brand" to="/"> <FaReact/> Portal</NavLink>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
