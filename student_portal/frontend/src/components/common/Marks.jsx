@@ -3,7 +3,7 @@ import Container from '@material-ui/core/Container'
 import { TextField, Box, Typography, Paper, Grid, IconButton, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { FaPlusCircle, FaTrash, FaCheckSquare, FaAngleRight, FaPlus } from "react-icons/fa";
-import { useState } from 'react';
+import { useState,useRef } from 'react';
 import axios from 'axios';
 // import CheckBoxIcon from '@mui/icons-material/CheckBox';
 const useStyles = makeStyles((theme) => ({
@@ -26,9 +26,14 @@ const Marks = () => {
     subject: "",
     marks: ""
   }
+  const packettemplate = {
+     RollNumber: " ",
+     subjectdata : []
+  }
   const [data, updatedata] = useState([template]);
   const [visibility, setVisibility] = useState(false);
   const [verifyroll,setRoll] = useState({rollNumber:""});
+  const dataPacket = useRef(packettemplate)
   const classes = useStyles();
   const addfield = () => {
     updatedata([...data, template])
@@ -47,16 +52,32 @@ const Marks = () => {
     filteredData.splice(index, 1);
     updatedata(filteredData);
   }
-  const handleSubmiit = () =>{
+  const handleSubmiit = async() =>{
     console.log("submitted");
+    dataPacket.current={
+      RollNumber : verifyroll.rollNumber,
+      subjectdata : data 
+    }
+    console.log(dataPacket.current)
+    try {
+     const response = await axios.post('http://localhost:8080/newmarksrecord',dataPacket.current);
+    }
+    catch(err){
+      console.error(err)
+    }
   }
-  const verify = () => {
-    const verified = false;
-    if(verified){
+  const verify = async() => {
+    const response = await axios.get(`http://localhost:8080/student/${verifyroll.rollNumber}`);
+    console.log(response.data);
+    if(response.data.found){
+      alert("Roll number verified")
     setVisibility(true)
     }
-    else{
-      setVisibility(false)
+    else if(response.data.found===false || verifyroll.rollNumber===""){
+      alert("Enter valid roll number")
+      updatedata([template]);
+      setVisibility(false);
+      // updatepacket(packettemplate);
     }
   }
   const handlecheck = (e) =>{
@@ -79,8 +100,8 @@ const Marks = () => {
             //   }
             // }}
             label='Roll number'
-            variant='filled'
-            id='filled-basic'
+            variant='standard'
+            id='standard-basic'
             fullWidth
             name='rollNumber'
             onChange={(e)=>{handlecheck(e)}}
