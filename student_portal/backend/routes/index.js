@@ -1,5 +1,13 @@
 const express = require('express');
 const router = express.Router();
+// const firebase = require('firebase');
+const admin = require('firebase-admin')
+const cors = require("cors")
+const keys = require('../private_keys.json')
+admin.initializeApp({
+  credential : admin.credential.cert(keys)
+});
+const db = admin.firestore();
 const users = [
   {
     "studentName": "keshav",
@@ -43,7 +51,23 @@ const admindata = [
     "adminNumber":"900077668"
   }
 ]
+// Route mappings and API's
 /* GET home page. */
+router.post('/test',async(req,res)=>{
+  try{
+    const id=req.body.email
+    const userjson = {
+      email : req.body.email,
+      name : req.body.name,
+      place : req.body.place,
+    }
+    const response = await db.collection('users').add(userjson);
+    res.send(response);
+  }
+  catch(err){
+    console.log(err)
+  }
+})
 router.get('/', function (req, res, next) {
   res.send("welcome");
 });
@@ -136,10 +160,18 @@ router.get('/student/:id', (req, res) => {
     return (user.rollNumber === id)
   })
   if (userdata) {
-    res.send(userdata).status(200)
+    res.send({
+      ...userdata,
+      found:true
+    }).status(200)
   }
   else {
-    res.send({ message: "user not found" }).status(404)
+    res.send(
+      {
+         message: "user not found",
+         found:false
+      }
+            ).status(404)
   }
 })
 router.put('/updatedata/:id', (req, res) => {
@@ -180,4 +212,10 @@ router.delete('/deleteuser/:id',(req,res)=>{
     res.send({message:"user not found"}).status(200);
   }
 })
+router.post('/newmarksrecord',(req,res)=>{
+  console.log(req.body);
+  res.end().status(200)
+  })
 module.exports = router;
+
+
