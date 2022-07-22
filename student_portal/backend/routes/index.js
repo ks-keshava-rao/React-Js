@@ -53,6 +53,7 @@ const admindata = [
 ]
 // Route mappings and API's
 /* GET home page. */
+/*Firebase Testi API's */
 router.post('/test',async(req,res)=>{
   try{
     const id=req.body.email
@@ -68,6 +69,35 @@ router.post('/test',async(req,res)=>{
     console.log(err)
   }
 })
+router.get('/testget',async(req,res)=>{
+    try{
+  const useref =  db.collection('users')
+  const response = await useref.get()
+  let arr = [];
+  response.forEach(doc => {
+    arr.push(doc.data());
+  })
+  res.send(arr)
+    }
+    catch(err){
+      console.log(err)
+    }
+})
+router.get('/testget/:id',async(req,res)=>{
+    try{
+  const useref =  db.collection('users').doc(req.params.id)
+  const response = await useref.get()
+  res.send(response.data());
+    }
+    catch(err){
+      console.log(err)
+    }
+})
+
+
+
+
+/*Portal CRUD API's*/
 router.get('/', function (req, res, next) {
   res.send("welcome");
 });
@@ -212,10 +242,37 @@ router.delete('/deleteuser/:id',(req,res)=>{
     res.send({message:"user not found"}).status(200);
   }
 })
-router.post('/newmarksrecord',(req,res)=>{
+router.post('/newmarksrecord',async(req,res)=>{
   console.log(req.body);
-  res.end().status(200)
+  try{
+  const {studentName,rollNumber,subjectdata} = req.body;
+  const docId = rollNumber;
+  const response = await db.collection('marks_data').doc(docId).set(req.body);
+  }
+  catch(err){
+    console.log(err)
+  }
   })
+router.get('/studentmarks/:id',async(req,res)=>{
+  try{
+    console.log(req.params.id)
+    const single_user_data = db.collection('marks_data').doc(req.params.id)
+    const response = await single_user_data.get()
+    console.log(response)
+    if(response.data())
+    res.send({
+      found:true,
+      fetched_data : response.data()
+    });
+    else
+    res.send({found:false})
+  }
+  catch(err){
+    console.log(err);
+  }
+})
+
+  
 module.exports = router;
 
 
