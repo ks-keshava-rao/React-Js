@@ -30,7 +30,7 @@ const EditData = () => {
       <div className='container'>
         <div className="fixed">
         <Link className="btn btn-primary position-relative " style={{ 'float': 'right', "margin": '16px' }} to='/signup'>Add <FaUserPlus /></Link>
-        <h2 className="text-center mt-4">Students data  </h2>
+        <h2 className="text-center mt-4 display-4">Students data  </h2>
         </div>
 
         <div className='py-4'>
