@@ -13,7 +13,7 @@ import Signup from './components/Admin/Signup';
 import Login from './components/Home/Login';
 import Home from './components/Home/Home';
 import Navbar2 from './components/Header/Navbar2';
-import Marks from './components/common/Marks';
+import Marks from './components/Admin/Marks';
 import Attendance from './components/common/Attendance';
 import Logout from './components/common/Logout';
 import EditData from './components/Admin/EditData';
@@ -28,6 +28,8 @@ import Edit from './components/Admin/Edit';
 import View from './components/Admin/View';
 import AdminState from './components/context/AdminState';
 import DisplayNamestate from './components/context/DisplayNamestate';
+import MarksView from './components/Admin/MarksView';
+import MarksEdit from './components/Admin/MarksEdit';
 function App() {
 
   return (
@@ -48,10 +50,12 @@ function App() {
                       <Route exact path='/attendance' element={<Attendance />} />
                       <Route exact path='/logout' element={<Logout />} />
                       <Route exact path='/signup' element={<Signup />} />
-                      <Route exact path='/marks_edit' element={<Marks />} />
+                      <Route exact path='/marks_add' element={<Marks />} />
                       <Route exact path='/editdata' element={<EditData />} />
                       <Route exact path='/editdata/edit/:id' element={<Edit />} />
                       <Route exact path='/editdata/:id' element={<View />} />
+                      <Route exact path='/viewmarks' element={<MarksView />} />
+                      <Route exact path='/viewmarks/:id' element={<MarksEdit />} />
                     </Route>
                   </Routes>
                 </Router>
