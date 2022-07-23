@@ -46,7 +46,7 @@ const MarksView = () => {
       <div className='container '>
         {/* <h4 className="text-center mt-4 display-4">Student Marks </h4> */}
         <div className='mt-4 me-5 pe-5'>
-          <Link className="btn btn-outline-primary me-5"
+          <Link className="btn btn-primary me-5"
             style={{ 'float': 'right', "margin": '16px' }}
             to='/marks_add'>
             Add Marks <FaPlus />
