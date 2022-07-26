@@ -33,8 +33,8 @@ const EditData = () => {
         <h2 className="text-center mt-4 display-4">Students data  </h2>
         </div>
 
-        <div className='py-4'>
-          <table className="table border shadow">
+        <div className='py-4' >
+          <table className="table border shadow" style={{"height":'200px'}}>
             <thead className='bg-dark text-white'>
               <tr style={{ textAlign: 'center' }}>
                 <th scope='col'>Sno.</th>
