@@ -5,7 +5,7 @@ const admin = require('firebase-admin')
 const cors = require("cors")
 const keys = require('../private_keys.json')
 admin.initializeApp({
-  credential : admin.credential.cert(keys)
+  credential: admin.credential.cert(keys)
 });
 const db = admin.firestore();
 const users = [
@@ -33,7 +33,12 @@ const users = [
     "password": "password",
     "Useremail": "rose@gmail.com"
   },
-  { "rollNumber": "12", "studentName": "Virginie", "Useremail": "vfrede0@shutterfly.com", "password": "password" },
+  {
+    "rollNumber": "12",
+    "studentName": "Virginie",
+    "Useremail": "vfrede0@shutterfly.com",
+    "password": "password"
+  },
   { "rollNumber": "177", "studentName": "Charla", "Useremail": "cnorsworthy1@zimbio.com", "password": "password" },
   { "rollNumber": "14", "studentName": "Kaine", "Useremail": "ktiler2@e-recht24.de", "password": "password" },
   { "rollNumber": "110", "studentName": "Fianna", "Useremail": "feadington3@go.com", "password": "password" },
@@ -48,50 +53,50 @@ const admindata = [
     "adminName": "john",
     "adminpass": "adminpass",
     "adminEmail": "john@gmail.com",
-    "adminNumber":"900077668"
+    "adminNumber": "900077668"
   }
 ]
 // Route mappings and API's
 /* GET home page. */
 /*Firebase Testi API's */
-router.post('/test',async(req,res)=>{
-  try{
-    const id=req.body.email
+router.post('/test', async (req, res) => {
+  try {
+    const id = req.body.email
     const userjson = {
-      email : req.body.email,
-      name : req.body.name,
-      place : req.body.place,
+      email: req.body.email,
+      name: req.body.name,
+      place: req.body.place,
     }
     const response = await db.collection('users').add(userjson);
     res.send(response);
   }
-  catch(err){
+  catch (err) {
     console.log(err)
   }
 })
-router.get('/testget',async(req,res)=>{
-    try{
-  const useref =  db.collection('users')
-  const response = await useref.get()
-  let arr = [];
-  response.forEach(doc => {
-    arr.push(doc.data());
-  })
-  res.send(arr)
-    }
-    catch(err){
-      console.log(err)
-    }
+router.get('/testget', async (req, res) => {
+  try {
+    const useref = db.collection('users')
+    const response = await useref.get()
+    let arr = [];
+    response.forEach(doc => {
+      arr.push(doc.data());
+    })
+    res.send(arr)
+  }
+  catch (err) {
+    console.log(err)
+  }
 })
-router.get('/testget/:id',async(req,res)=>{
-    try{
-  const useref =  db.collection('users').doc(req.params.id)
-  const response = await useref.get()
-  res.send(response.data());
-    }
-    catch(err){
-      console.log(err)
-    }
+router.get('/testget/:id', async (req, res) => {
+  try {
+    const useref = db.collection('users').doc(req.params.id)
+    const response = await useref.get()
+    res.send(response.data());
+  }
+  catch (err) {
+    console.log(err)
+  }
 })
 
 
@@ -111,7 +116,7 @@ router.post('/login', (req, res, next) => {
   if (result) {
     if (result.password == req.body.password) {
       res.status(200).send({
-        loggedData:result,
+        loggedData: result,
         auth: true,
         message: "Login successfull",
       })
@@ -138,7 +143,7 @@ router.post('/adminlogin', (req, res, next) => {
   if (adminfound) {
     if (adminfound.adminpass == req.body.password) {
       res.status(200).send({
-        loggedData : adminfound,
+        loggedData: adminfound,
         auth: true,
         message: "admin Login successfull",
       })
@@ -192,16 +197,16 @@ router.get('/student/:id', (req, res) => {
   if (userdata) {
     res.send({
       ...userdata,
-      found:true
+      found: true
     }).status(200)
   }
   else {
     res.send(
       {
-         message: "user not found",
-         found:false
+        message: "user not found",
+        found: false
       }
-            ).status(404)
+    ).status(404)
   }
 })
 router.put('/updatedata/:id', (req, res) => {
@@ -229,50 +234,60 @@ router.put('/updatedata/:id', (req, res) => {
       })
   }
 })
-router.delete('/deleteuser/:id',(req,res)=>{
-  const {id} = req.params
+router.delete('/deleteuser/:id', (req, res) => {
+  const { id } = req.params
   let foundid = users.findIndex((user) => {
     return (id === user.rollNumber);
   })
-  if(foundid>=0){
-    users.splice(foundid,1)
-    res.send({deleted:true}).status(200)
+  if (foundid >= 0) {
+    users.splice(foundid, 1)
+    res.send({ deleted: true }).status(200)
   }
-  else{
-    res.send({message:"user not found"}).status(200);
+  else {
+    res.send({ message: "user not found" }).status(200);
   }
 })
-router.post('/newmarksrecord',async(req,res)=>{
+router.post('/newmarksrecord', async (req, res) => {
   console.log(req.body);
-  try{
-  const {studentName,rollNumber,subjectdata} = req.body;
-  const docId = rollNumber;
-  const response = await db.collection('marks_data').doc(docId).set(req.body);
+  try {
+    const { studentName, rollNumber, subjectdata } = req.body;
+    const docId = rollNumber;
+    const response = await db.collection('marks_data').doc(docId).set(req.body);
   }
-  catch(err){
+  catch (err) {
     console.log(err)
   }
-  })
-router.get('/studentmarks/:id',async(req,res)=>{
-  try{
+})
+router.get('/studentmarks/:id', async (req, res) => {
+  try {
     console.log(req.params.id)
     const single_user_data = db.collection('marks_data').doc(req.params.id)
     const response = await single_user_data.get()
     console.log(response)
-    if(response.data())
-    res.send({
-      found:true,
-      fetched_data : response.data()
-    });
+    if (response.data())
+      res.send({
+        found: true,
+        fetched_data: response.data()
+      });
     else
-    res.send({found:false})
+      res.send({ found: false })
   }
+  catch (err) {
+    console.log(err);
+  }
+})
+router.post('/marksupdate/:id', async(req, res) => {
+  const  {id} = req.params;
+  const data = req.body
+  try{
+  const update_data = db.collection('users').doc(id)
+  const response = await update_data.update(data)
+  res.send(response)
+  } 
   catch(err){
     console.log(err);
   }
 })
-
-  
 module.exports = router;
 
 
