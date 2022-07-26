@@ -108,7 +108,9 @@ const MarksView = () => {
 
       </div>
       :
-      <h1 className='display-5 text-center text-success mt-5 '> Enter roll number to continue... </h1>
+      <div className="container">
+      <h1 className='display-6 text-center text-success mt-5 pt-5 '> Enter roll number to continue... </h1>
+      </div>
 }   
     </>
   )
