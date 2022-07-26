@@ -5,9 +5,9 @@ import { FaReact } from "react-icons/fa";
 
 const Navbar2 = () => {
     const retreivedNav = useContext(NavbarContext)
-    
     let id = 1;
     return (
+        
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary bg-gradient
         sticky-top">
         {/* {console.log(props)}
@@ -22,7 +22,7 @@ const Navbar2 = () => {
                     {
                         retreivedNav.navbarchoice.map((tab,index) => {
                             return(
-                            <ul key={index} className="navbar-nav mr-auto">
+                            <ul key={index} className="navbar-nav justify-content-center mr-auto">
                                 <li    className="nav-item active">
                                     {/* {console.log(tab.path,tab.pageName)} */}
                                     <NavLink className="nav-link" to={tab.path}>{tab.pageName} <span className="sr-only"></span></NavLink>
@@ -33,6 +33,7 @@ const Navbar2 = () => {
                 </div>
             </div>
         </nav>
+        
     )
 }
 
