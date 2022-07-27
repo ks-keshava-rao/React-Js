@@ -41,12 +41,26 @@ const MarksView = () => {
       console.log(err);
     }
   }
+  const deleteData = async() => {
+    try{
+     const response = await axios.delete(`http://localhost:8080/delete/${inputfield.rollNumber}`)
+     if(response.data.deleted){
+      alert("successfully deleted ");
+      setvisibility(false)
+     }else{
+      alert("could'nt delete")
+     }
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
   return (
     <>
       <div className='container '>
         {/* <h4 className="text-center mt-4 display-4">Student Marks </h4> */}
         <div className='mt-4 me-5 pe-5'>
-          <Link className="btn btn-primary me-5"
+          <Link className="btn btn-warning me-5"
             style={{ 'float': 'right', "margin": '16px' }}
             to='/marks_add'>
             Add Marks <FaPlus />
@@ -101,7 +115,7 @@ const MarksView = () => {
             <div className="col-sm-12 text-center mt-4">
               <Link className="btn btn-success btn-md me-4" to='/' type="button">Home <MdHome /> </Link>
               <Link className="btn btn-warning btn-md ms-3" to={`/viewmarks/${restdata.rollNumber}`} >Edit <FaEdit /> </Link>
-              <button className="btn btn-danger btn-md ms-5"  >Delete <FaTrash/> </button>
+              <button className="btn btn-danger btn-md ms-5" onClick={(e)=>deleteData()} >Delete <FaTrash/> </button>
             </div>
           </div>
         </div>
