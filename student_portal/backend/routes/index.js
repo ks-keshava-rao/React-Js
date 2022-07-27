@@ -270,7 +270,7 @@ router.get('/studentmarks/:id', async (req, res) => {
         fetched_data: response.data()
       });
     else
-      res.send({ found: false })
+      res.send({ found: false }).status(200)
   }
   catch (err) {
     console.log(err);
@@ -280,9 +280,34 @@ router.post('/marksupdate/:id', async(req, res) => {
   const  {id} = req.params;
   const data = req.body
   try{
-  const update_data = db.collection('users').doc(id)
-  const response = await update_data.update(data)
-  res.send(response)
+  const update_data = db.collection('marks_data').doc(id)
+  const check = await update_data.get()
+  console.log(update_data)
+  if(!check.exists){
+    res.send({updated:false}).status(200)
+  }
+  else{
+  const response = await update_data.update(data)  
+    res.send({updated:true}).status(200);
+  }
+  } 
+  catch(err){
+    console.log(err);
+  }
+})
+router.delete('/delete/:id', async(req, res) => {
+  const  {id} = req.params;
+  try{
+  const delete_data = db.collection('marks_data').doc(id)
+  const check = await delete_data.get()
+  console.log(delete_data)
+  if(!check.exists){
+    res.send({deleted:false}).status(200)
+  }
+  else{
+  const response = await delete_data.delete()
+    res.send({deleted:true}).status(200);
+  }
   } 
   catch(err){
     console.log(err);
