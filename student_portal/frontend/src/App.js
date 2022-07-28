@@ -14,7 +14,7 @@ import Login from './components/Home/Login';
 import Home from './components/Home/Home';
 import Navbar2 from './components/Header/Navbar2';
 import Marks from './components/Admin/Marks';
-import Attendance from './components/common/Attendance';
+import AttendanceView from './components/common/AttendanceView';
 import Logout from './components/common/Logout';
 import EditData from './components/Admin/EditData';
 import NavbarState from './components/context/NavState';
@@ -47,7 +47,6 @@ function App() {
                     <Route exact path='*' element={<Notfound />} />
                     <Route element={<ProtectedRoutes />}>
                       <Route exact path='/marks' element={<Marks />} />
-                      <Route exact path='/attendance' element={<Attendance />} />
                       <Route exact path='/logout' element={<Logout />} />
                       <Route exact path='/signup' element={<Signup />} />
                       <Route exact path='/marks_add' element={<Marks />} />
@@ -56,6 +55,7 @@ function App() {
                       <Route exact path='/editdata/:id' element={<View />} />
                       <Route exact path='/viewmarks' element={<MarksView />} />
                       <Route exact path='/viewmarks/:id' element={<MarksEdit />} />
+                      <Route exact path='/viewattendance' element={<AttendanceView/>} />
                     </Route>
                   </Routes>
                 </Router>
