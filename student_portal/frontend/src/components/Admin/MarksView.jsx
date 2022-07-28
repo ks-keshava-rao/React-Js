@@ -4,12 +4,12 @@ import { useState } from 'react';
 import { FaCheck, FaPlus } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { MdLogout, MdHome, MdPeopleAlt } from "react-icons/md";
-import { FaEdit,FaTrash } from "react-icons/fa";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 const MarksView = () => {
   const [inputfield, setfield] = useState({ rollNumber: "" });
   const [data, setData] = useState([]);
-  const [visiblility,setvisibility] = useState(false)
+  const [visiblility, setvisibility] = useState(false)
   const [restdata, setRestdata] = useState({
     studentName: " ",
     rollNumber: " "
@@ -41,19 +41,47 @@ const MarksView = () => {
       console.log(err);
     }
   }
-  const deleteData = async() => {
-    try{
-     const response = await axios.delete(`http://localhost:8080/delete/${inputfield.rollNumber}`)
-     if(response.data.deleted){
-      alert("successfully deleted ");
-      setvisibility(false)
-     }else{
-      alert("could'nt delete")
-     }
+  const deleteData = async () => {
+    try {
+      const response = await axios.delete(`http://localhost:8080/delete/${inputfield.rollNumber}`)
+      if (response.data.deleted) {
+        alert("successfully deleted ");
+        setvisibility(false)
+      } else {
+        alert("could'nt delete")
+      }
     }
-    catch(err){
+    catch (err) {
       console.log(err)
     }
+  }
+  const ListView = () => {
+    
+    return (
+      <div className="container pt-1 mt-3">
+        <div className="container mt-5">
+          <div className="w-75 mx-auto  rounded shadow p-5">
+            <h1 className='display-5 text-center text-secondary text-uppercase mb-4'> {restdata.studentName} - {restdata.rollNumber} </h1>
+            <ul className="list-group w-50 mt-3 mx-auto justify-content-center">
+              {
+                data.map((property, index) =>
+                (
+                  <li key={index}
+                    className="list-group-item  list-group-item-action text-uppercase lead text-secondary">
+                    <b>{property.subject} :  {property.marks}/100 </b>
+                  </li>
+                ))
+              }
+            </ul>
+            <div className="col-sm-12 text-center mt-4">
+              <Link className="btn btn-success btn-md me-4" to='/' type="button">Home <MdHome /> </Link>
+              <Link className="btn btn-warning btn-md ms-3" to={`/viewmarks/${restdata.rollNumber}`} >Edit <FaEdit /> </Link>
+              <button className="btn btn-danger btn-md ms-5" onClick={(e) => deleteData()} >Delete <FaTrash /> </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
   }
   return (
     <>
@@ -94,38 +122,14 @@ const MarksView = () => {
         </form>
       </div>
       {
-        visiblility 
-        ?
-      <div className="container pt-1 mt-3">
-        <div className="container mt-5">
-          <div className="w-75 mx-auto  rounded shadow p-5">
-            <h1 className='display-5 text-center text-secondary text-uppercase mb-4'> {restdata.studentName} - {restdata.rollNumber} </h1>
-            <ul className="list-group w-50 mt-3 mx-auto justify-content-center">
-              {
-                data.map((property, index) =>
-                (
-                  <li key={index}
-                    className="list-group-item  list-group-item-action text-uppercase lead text-secondary">
-                    <b>{property.subject} :  {property.marks}/100 </b>
-                  </li>
-                ))
-              }
-
-            </ul>
-            <div className="col-sm-12 text-center mt-4">
-              <Link className="btn btn-success btn-md me-4" to='/' type="button">Home <MdHome /> </Link>
-              <Link className="btn btn-warning btn-md ms-3" to={`/viewmarks/${restdata.rollNumber}`} >Edit <FaEdit /> </Link>
-              <button className="btn btn-danger btn-md ms-5" onClick={(e)=>deleteData()} >Delete <FaTrash/> </button>
-            </div>
+        visiblility
+          ?
+          <ListView />
+          :
+          <div className="container">
+            <h1 className='display-6 text-center text-success mt-5 pt-5 '> Enter roll number to continue... </h1>
           </div>
-        </div>
-
-      </div>
-      :
-      <div className="container">
-      <h1 className='display-6 text-center text-success mt-5 pt-5 '> Enter roll number to continue... </h1>
-      </div>
-}   
+      }
     </>
   )
 }
