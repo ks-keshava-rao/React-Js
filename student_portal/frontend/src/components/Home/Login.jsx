@@ -38,7 +38,7 @@ const Login = () => {
         pageName: "Marks", path: "/viewmarks"
     },
     {
-        pageName: "Attendance", path: "/attendance_edit"
+        pageName: "Attendance", path: "/viewattendance"
     },
     {
         pageName: "Student Details", path: "/editdata"
