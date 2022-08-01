@@ -14,6 +14,7 @@ function Home(props) {
           <br /> <br />
           <br /> <br />
           <h1 className=' display-4 text-center mb-5 pb-5'>  Welcome to Portal {displayname} </h1>
+          {/* <h1 className=' display-8 text-center mb-5 pb-5'>  login to continue... </h1> */}
         </div>
       </div>
       </div>
