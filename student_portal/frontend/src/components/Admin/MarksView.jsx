@@ -58,7 +58,7 @@ const MarksView = () => {
   const ListView = () => {
     
     return (
-      <div className="container pt-1 mt-3">
+      <div className="container pt-1 mt-3 pt-3">
         <div className="container mt-5">
           <div className="w-75 mx-auto  rounded shadow p-5">
             <h1 className='display-5 text-center text-secondary text-uppercase mb-4'> {restdata.studentName} - {restdata.rollNumber} </h1>
