@@ -31,7 +31,6 @@ import DisplayNamestate from './components/context/DisplayNamestate';
 import MarksView from './components/Admin/MarksView';
 import MarksEdit from './components/Admin/MarksEdit';
 function App() {
-
   return (
     <>
       <DisplayNamestate>
