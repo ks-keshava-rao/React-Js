@@ -9,7 +9,7 @@ const AttendanceView = () => {
    if(currDate.jsEvent.altKey) {
    console.log(currDate.dateStr);
    setEvent([
-    { title: 'event 1', date: currDate.date }
+    { title: 'Present', date: currDate.date }
   ])
   console.log(CalEvent)
    }
